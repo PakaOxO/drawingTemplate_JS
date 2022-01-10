@@ -77,6 +77,11 @@ body {
     cursor: pointer;
 }
 
+.selected {
+    transform: scale(1.1);
+    border: 2px solid #fff;
+}
+
 @media screen and (max-width: 680px) {
     .canvas-wrapper {
         position: relative;

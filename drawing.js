@@ -1,6 +1,8 @@
+const CLASS_SELECTED = "selected";
+
 let colorPallete = [
-    "#fff",
     "#000",
+    "#fff",
     "#A68DAD",
     "#1C6DD0",
     "#FED1EF",
@@ -15,8 +17,8 @@ let isPainting = false;
     HTML Object
 */
 const canvas = document.querySelector("#canvas");
-const range = document.querySelector("#range");
-const box_palette = document.querySelector("#palette");
+const input_range = document.querySelector("#range");
+const div_palette = document.querySelector("#palette");
 
 
 /*
@@ -26,16 +28,31 @@ const ctx = canvas.getContext("2d");
 
 
 /*
-    colorPallete에 있는 Color 값들을 HTML내에 추가
+    Controller 관련 함수들
 */
+function changeBrushWidth(event) {
+    ctx.lineWidth = event.target.value;
+}
+
 function addColorsInController() {
     colorPallete.forEach((color) => {
         const newColorTag = document.createElement("div");
         newColorTag.classList.add("color");
         newColorTag.style.backgroundColor = color;
+        newColorTag.addEventListener("click", changeColor);
 
-        box_palette.appendChild(newColorTag);
+        div_palette.appendChild(newColorTag);
     });
+}
+
+function changeColor(event) {
+    const paletteColors = document.getElementsByClassName("color");
+    // const paletteColors = document.querySelectorAll(".color");
+    Array.from(paletteColors).forEach(color => color.classList.remove(CLASS_SELECTED));
+    // paletteColors.forEach(color => color.classList.remove(CLASS_SELECTED));
+
+    event.target.classList.add(CLASS_SELECTED);
+    ctx.strokeStyle = this.style.backgroundColor;
 }
 
 
@@ -55,11 +72,11 @@ function onMouseMove(event) {
     }
 }
 
-function startPainting(event) {
+function startPainting() {
     isPainting = true;
 }
 
-function endPainting(event) {
+function endPainting() {
     isPainting = false;
 }
 
@@ -68,13 +85,16 @@ function endPainting(event) {
     init 함수
 */
 function init() {
+    if (input_range) {
+        input_range.addEventListener("change", changeBrushWidth);
+    }
     addColorsInController();
 
     if (canvas) {
         canvas.width = canvas.offsetWidth;
         canvas.height = canvas.offsetHeight;
-        ctx.strokeStyle = colorPallete[1];
-        ctx.lineWidth = range.range;
+        ctx.strokeStyle = colorPallete[0];
+        ctx.lineWidth = input_range.range;
 
         canvas.addEventListener("mousemove", onMouseMove);
         canvas.addEventListener("mousedown", startPainting);
