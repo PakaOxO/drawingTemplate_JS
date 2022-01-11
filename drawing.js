@@ -1,5 +1,21 @@
-const CLASS_SELECTED = "selected";
+/*
+    HTML Objects
+*/
+const canvas = document.querySelector("#canvas");
+const input_range = document.querySelector("#range");
+const div_mode = document.querySelector("#mode");
+const div_palette = document.querySelector("#palette");
 
+
+/*
+    Other Objects
+*/
+const ctx = canvas.getContext("2d");
+
+
+/*
+    Variables
+*/
 let colorPallete = [
     "#000",
     "#fff",
@@ -11,20 +27,23 @@ let colorPallete = [
 ];
 
 let isPainting = false;
+let mode = "paint";
+
+const CLASS_SELECTED = "selected";
+let CANVAS_WIDTH = canvas.offsetWidth;
+let CANVAS_HEIGHT = canvas.offsetHeight;
 
 
 /*
-    HTML Object
+    Normal Functions
 */
-const canvas = document.querySelector("#canvas");
-const input_range = document.querySelector("#range");
-const div_palette = document.querySelector("#palette");
+function onWindowResize() {
+    CANVAS_WIDTH = canvas.offsetWidth;
+    CANVAS_HEIGHT = canvas.offsetHeight;
 
-
-/*
-    Other Object
-*/
-const ctx = canvas.getContext("2d");
+    canvas.width = CANVAS_WIDTH;
+    canvas.height = CANVAS_HEIGHT;
+}
 
 
 /*
@@ -32,6 +51,16 @@ const ctx = canvas.getContext("2d");
 */
 function changeBrushWidth(event) {
     ctx.lineWidth = event.target.value;
+}
+
+function changeMode() {
+    if (mode == "paint") {
+        mode = "fill";
+        div_mode.value = "Fill";
+    } else if (mode == "fill") {
+        mode = "paint";
+        div_mode.value = "Paint";
+    }
 }
 
 function addColorsInController() {
@@ -52,12 +81,15 @@ function changeColor(event) {
     // paletteColors.forEach(color => color.classList.remove(CLASS_SELECTED));
 
     event.target.classList.add(CLASS_SELECTED);
-    ctx.strokeStyle = this.style.backgroundColor;
+
+    const thisColor = this.style.backgroundColor;
+    ctx.strokeStyle = thisColor;
+    ctx.fillStyle = thisColor;
 }
 
 
 /*
-    사용자의 마우스 동작을 확인하여 특정 기능을 수행하는 함수들
+    Canvas 관련 함수들
 */
 function onMouseMove(event) {
     const posX = event.offsetX;
@@ -67,8 +99,10 @@ function onMouseMove(event) {
         ctx.beginPath();
         ctx.moveTo(posX, posY);
     } else {
-        ctx.lineTo(posX, posY);
-        ctx.stroke();
+        if (mode == "paint") {
+            ctx.lineTo(posX, posY);
+            ctx.stroke();
+        }
     }
 }
 
@@ -80,11 +114,19 @@ function endPainting() {
     isPainting = false;
 }
 
+function fillingCanvas() {
+    if (mode == "fill") {
+        ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+    }
+}
+
 
 /*
     init 함수
 */
 function init() {
+    window.addEventListener("resize", onWindowResize);
+
     if (input_range) {
         input_range.addEventListener("change", changeBrushWidth);
     }
@@ -95,11 +137,23 @@ function init() {
         canvas.height = canvas.offsetHeight;
         ctx.strokeStyle = colorPallete[0];
         ctx.lineWidth = input_range.range;
+        ctx.fillStyle = colorPallete[0];
+
+        div_mode.addEventListener("click", changeMode);
 
         canvas.addEventListener("mousemove", onMouseMove);
+        canvas.addEventListener("touchmove", onMouseMove);
+
         canvas.addEventListener("mousedown", startPainting);
+        canvas.addEventListener("touchstart", startPainting);
+
         canvas.addEventListener("mouseup", endPainting);
+        canvas.addEventListener("touchend", endPainting)
+
         canvas.addEventListener("mouseleave", endPainting);
+        canvas.addEventListener("touchcancel", endPainting);
+
+        canvas.addEventListener("click", fillingCanvas);
     }
 }
 
