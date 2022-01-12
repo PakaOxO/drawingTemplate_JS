@@ -8,3 +8,6 @@ Jan 9, Update Script, Add feature of changing selected color for drawing
                     , Also you can change your brush thickness from 0 to 10.0 with bar-type contoller
 Jan 10, Update Script, Add feature of filling canvas background with selected color.
                         , Add touch event. Now mobile user can operate draw tool on the canvas.
+Jan 11, Update Script, Fix drawing feature in mobile.
+                        - Replace prev-event for mouse to touch event
+                     , Add image saving feature. Now you can save your painting
