@@ -11,3 +11,5 @@ Jan 10, Update Script, Add feature of filling canvas background with selected co
 Jan 11, Update Script, Fix drawing feature in mobile.
                         - Replace prev-event for mouse to touch event
                      , Add image saving feature. Now you can save your painting
+Jan 12, Update Script, Add features.
+                        - Now you can clear your canvas to initial condition

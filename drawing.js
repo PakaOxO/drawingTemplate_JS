@@ -6,6 +6,7 @@ const element_canvas = canvas.getBoundingClientRect();
 const input_range = document.querySelector("#range");
 const btn_mode = document.querySelector("#mode");
 const btn_save = document.querySelector("#save");
+const btn_clear = document.querySelector("#clear");
 const div_palette = document.querySelector("#palette");
 
 
@@ -99,6 +100,10 @@ function changeColor(event) {
     ctx.fillStyle = thisColor;
 }
 
+function clearCanvas() {
+    ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+}
+
 
 /*
     Canvas 관련 함수들
@@ -115,6 +120,8 @@ function onMouseMove(event) {
         if (mode == "paint") {
             ctx.lineTo(posX, posY);
             ctx.stroke();
+        } else if (mode == "erase") {
+            ctx.globalCompotieOperation = "destination-out";
         }
     }
 }
@@ -157,6 +164,8 @@ function startTouching(event) {
         ctx.moveTo(posX, posY);
     } else if (mode == "fill") {
         ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+    } else if (mode == "erase") {
+        ctx.globalCompotieOperation = "destination-out";
     }
 }
 
@@ -191,6 +200,7 @@ function init() {
 
         btn_mode.addEventListener("click", changeMode);
         btn_save.addEventListener("click", saveToImage);
+        btn_clear.addEventListener("click", clearCanvas);
 
         canvas.addEventListener("mousemove", onMouseMove);
         canvas.addEventListener("touchmove", onTouchMove, false);
