@@ -16,8 +16,8 @@ body {
 }
 
 .canvas {
-    width: 700px;
-    height: 700px;
+    width: 600px;
+    height: 600px;
     border-radius: 20px;
     background-color: #fff;
     box-shadow: 0 4px 20px #C7B198;
@@ -63,20 +63,34 @@ body {
     position: relative;
 }
 
-.controller__buttons .button__more:hover .more__menu {
-    display: block;
-}
-
-.more__menu {
+.controller__buttons .button__more .more__menu {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     display: none;
     position: absolute;
     z-index: 1;
-    width: 100px;
-    height: 100px;
-    border-radius: 10px;
-    left: 0px;
-    top: -100px;
+    width: 85px;
+    left: 65px;
+    top: -35px;
     background-color: #555;
+    transition: all 2s;
+}
+
+.controller__buttons .button__more:hover .more__menu {
+    display: flex;
+    transform: translateY(0);
+}
+
+.more__menu .menu__items {
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+    cursor: pointer;
+}
+
+.more__menu .menu__items:hover {
+    background-color: #666;
 }
 
 .controller__palette {
