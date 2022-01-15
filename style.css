@@ -64,38 +64,52 @@ body {
 }
 
 .controller__buttons .button__more .more__menu {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    all: unset;
     display: none;
     position: absolute;
     z-index: 1;
-    width: 85px;
-    left: 65px;
-    top: -35px;
-    background-color: #555;
-    transition: all 2s;
+    width: 60px;
+    left: 5px;
+    top: -70px;
+    background-color: #fff;
+    animation: more_menu 300ms forwards ease-in;
+    transform-origin: bottom;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
 }
 
 .controller__buttons .button__more:hover .more__menu {
-    display: flex;
-    transform: translateY(0);
+    display: block;
+}
+
+@keyframes more_menu {
+    0% {
+        transform: scaleY(0);
+    }
+    80% {
+        transform: scaleY(1.1);
+    }
+    100% {
+        transform: scaleY(1);
+    }
 }
 
 .more__menu .menu__items {
-    color: #fff;
+    display: block;
     text-align: center;
-    padding: 10px 0;
+    padding: 10px;
     cursor: pointer;
 }
 
 .more__menu .menu__items:hover {
-    background-color: #666;
+    cursor: pointer;
+    font-weight: 600;
 }
 
 .controller__palette {
     display: flex;
     justify-content: center;
+    align-items: center;
     margin-top: 20px;
 }
 

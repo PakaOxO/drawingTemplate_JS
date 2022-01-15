@@ -8,6 +8,7 @@ const btn_mode = document.querySelector("#mode");
 const btn_save = document.querySelector("#save");
 const btn_clear = document.querySelector("#clear");
 const div_palette = document.querySelector("#palette");
+const input_colorPicker = document.querySelector("#colorpicker");
 
 
 /*
@@ -98,6 +99,9 @@ function changeColor(event) {
     const thisColor = this.style.backgroundColor;
     ctx.strokeStyle = thisColor;
     ctx.fillStyle = thisColor;
+    input_colorPicker.value = thisColor;
+    console.log(thisColor);
+    console.log(input_colorPicker.value);
 }
 
 function clearCanvas() {

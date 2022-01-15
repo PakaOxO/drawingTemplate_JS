@@ -25,14 +25,16 @@
             <input type="button" id="mode" class="button" value="Paint" />
             <div id="others" class="button__more">
                 <input type="button" class="button" value="More" />
-                <div class="more__menu" id="menu">
-                    <div id="save" class="menu__items">Save</div>
-                    <div id="clear" class="menu__items">Clear</div>
-                </div>
+                <ul class="more__menu" id="menu">
+                    <l1 id="save" class="menu__items">Save</l1>
+                    <l1 id="clear" class="menu__items">Clear</l1>
+                </ul>
             </div>
         </div>
         <div class="controller__menus"></div>
-        <div id="palette" class="controller__palette"></div>
+        <div id="palette" class="controller__palette">
+            <input type="color" id="colorpicker" />
+        </div>
     </div>
     <script src="drawing.js"></script>
 </body>
