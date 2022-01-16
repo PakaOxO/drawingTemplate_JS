@@ -131,6 +131,14 @@ body {
     border: 2px solid #fff;
 }
 
+.controller__palette #colorpicker {
+    all: unset;
+    width: 20px;
+    height: 30px;
+    border: 1px solid #fff;
+    margin: 0 5px;
+}
+
 @media screen and (max-width: 680px) {
     .canvas-wrapper {
         position: relative;

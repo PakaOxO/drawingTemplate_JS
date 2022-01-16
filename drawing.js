@@ -99,9 +99,16 @@ function changeColor(event) {
     const thisColor = this.style.backgroundColor;
     ctx.strokeStyle = thisColor;
     ctx.fillStyle = thisColor;
-    input_colorPicker.value = thisColor;
-    console.log(thisColor);
-    console.log(input_colorPicker.value);
+    input_colorPicker.value = ConvertRGBtoHex(thisColor);
+}
+
+function ConvertRGBtoHex(rgb) {
+    return `#${rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/).slice(1).map(n => parseInt(n, 10).toString(16).padStart(2, '0')).join('')}`;
+}
+
+function changePaletteColor() {
+    const selected_color = document.getElementsByClassName(CLASS_SELECTED)[0];
+    selected_color.style.backgroundColor = this.value;
 }
 
 function clearCanvas() {
@@ -191,6 +198,12 @@ function init() {
     const firstColor = document.getElementsByClassName("color")[0];
     if (firstColor) {
         firstColor.classList.add(CLASS_SELECTED);
+
+        if (input_colorPicker) {
+            const temp_color = firstColor.style.backgroundColor;
+            input_colorPicker.addEventListener("change", changePaletteColor);
+            input_colorPicker.value = ConvertRGBtoHex(temp_color);
+        }
     }
 
 

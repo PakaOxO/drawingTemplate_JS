@@ -13,3 +13,6 @@ Jan 11, Update Script, Fix drawing feature in mobile.
                      , Add image saving feature. Now you can save your painting
 Jan 12, Update Script, Add features.
                         - Now you can clear your canvas to initial condition
+Jan 15, Update Script, Add More menu with drop-up animation
+Jan 16, Update Script, Add feature
+                        - Now you can change your palette color with colorpicker, new button, left-side of palette color
