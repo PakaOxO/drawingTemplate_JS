@@ -109,6 +109,8 @@ function ConvertRGBtoHex(rgb) {
 function changePaletteColor() {
     const selected_color = document.getElementsByClassName(CLASS_SELECTED)[0];
     selected_color.style.backgroundColor = this.value;
+    ctx.strokeStyle = this.value;
+    ctx.fillStyle = this.value;
 }
 
 function clearCanvas() {

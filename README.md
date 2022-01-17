@@ -16,3 +16,4 @@ Jan 12, Update Script, Add features.
 Jan 15, Update Script, Add More menu with drop-up animation
 Jan 16, Update Script, Add feature
                         - Now you can change your palette color with colorpicker, new button, left-side of palette color
+Jan 17, Update Script, Change more button style and add image button for inserting an image in the canvas(Not running now)

@@ -47,16 +47,27 @@ body {
 .controller__buttons .button {
     all: unset;
     background-color: white;
-    margin: 0 5px;
-    padding: 10px 0;
     width: 60px;
+    padding: 10px 0;
     border-radius: 5px;
     text-align: center;
     box-shadow: 0 2px 10px #C7B198;
 }
 
-.controller__buttons input:hover {
-    font-weight: 600;
+.controller__buttons > #mode, #others {
+    margin: 0 5px;
+}
+
+.controller__buttons .button:hover {
+    background-color: #555;
+    color: #fff;
+}
+
+.controller__buttons #others:hover > .button {
+    background-color: #555;
+    color: #fff;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
 }
 
 .controller__buttons .button__more {
@@ -69,9 +80,10 @@ body {
     position: absolute;
     z-index: 1;
     width: 60px;
-    left: 5px;
-    top: -70px;
-    background-color: #fff;
+    left: 0px;
+    bottom: 35px;
+    background-color: #555;
+    color: #fff;
     animation: more_menu 300ms forwards ease-in;
     transform-origin: bottom;
     border-top-left-radius: 5px;
@@ -101,9 +113,8 @@ body {
     cursor: pointer;
 }
 
-.more__menu .menu__items:hover {
-    cursor: pointer;
-    font-weight: 600;
+.controller__buttons #fileopen {
+    display: none;
 }
 
 .controller__palette {
