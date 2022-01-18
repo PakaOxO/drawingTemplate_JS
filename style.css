@@ -150,6 +150,7 @@ body {
     margin: 0 5px;
 }
 
+
 @media screen and (max-width: 680px) {
     .canvas-wrapper {
         position: relative;

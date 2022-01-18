@@ -6,7 +6,9 @@ const element_canvas = canvas.getBoundingClientRect();
 const input_range = document.querySelector("#range");
 const btn_mode = document.querySelector("#mode");
 const btn_save = document.querySelector("#save");
+const btn_image = document.querySelector("#image");
 const btn_clear = document.querySelector("#clear");
+const input_fileopen = document.querySelector("#fileopen");
 const div_palette = document.querySelector("#palette");
 const input_colorPicker = document.querySelector("#colorpicker");
 
@@ -75,6 +77,15 @@ function saveToImage() {
     link.href = imageUrl;
     link.download = "Canvas_" + today.getFullYear().toString() + today.getHours().toString() + today.getMinutes().toString() + today.getSeconds().toString();
     link.click();
+}
+
+function addImageOnCanvas() {
+    const img = document.createElement("img");
+    img.onload = () => {
+        ctx.drawImage(img, 0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+    }
+    img.src = URL.createObjectURL(input_fileopen.files[0]);
+    URL.revokeObjectURL(input_fileopen.files[0]);
 }
 
 function addColorsInController() {
@@ -219,7 +230,12 @@ function init() {
 
         btn_mode.addEventListener("click", changeMode);
         btn_save.addEventListener("click", saveToImage);
+        btn_image.addEventListener("click", () => {
+            input_fileopen.click();
+        });
         btn_clear.addEventListener("click", clearCanvas);
+
+        input_fileopen.addEventListener("change", addImageOnCanvas);
 
         canvas.addEventListener("mousemove", onMouseMove);
         canvas.addEventListener("touchmove", onTouchMove, false);
